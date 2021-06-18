@@ -19,6 +19,7 @@ const Error4O4 = (req, res, next) => {
 // 413	PayloadTooLarge
 // 411	LengthRequired
 const Error500 = (error, req, res, next) => {
+  console.log(error);
   if (error.status === 500 || error.status === undefined) {
     // Handle 500
     res
