@@ -8,6 +8,12 @@ const rfs = require("rotating-file-stream");
 const mongoSanitize = require("express-mongo-sanitize"); // to prevent nosql injection
 const xxs = require("xss-clean"); // filter input from users to prevent xss attacks
 
+// APIS
+const { CarAPI } = require("./routes/car");
+const { CardAPI } = require("./routes/card");
+
+const { EmployeeAPI } = require("./routes/employee");
+
 const { Error4O4, Error500 } = require("./modules/global-errors");
 
 const app = express();
@@ -87,6 +93,12 @@ app.use(
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome -- Highway access App" });
 });
+
+app.use("/api/car", CarAPI);
+app.use("/api/card", CardAPI);
+
+// FOR testing and insert random employees
+app.use("/api/employee", EmployeeAPI);
 
 // handling global Errors
 app.use(Error4O4);
