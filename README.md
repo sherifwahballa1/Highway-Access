@@ -13,7 +13,7 @@ ___
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Highway-Access endpoints"
 ## Endpoints
 
-- `POST /api/employee` (for creating employees for testing) 
+- `POST /api/employee` (for creating employees for testing...) 
   
   **payload**
     ```json
@@ -55,23 +55,23 @@ ___
 
 - `GET /api/car/${carID}` (get car info by id) 
    
-    **Query params**
+    **`Query params`**
 
-    * <span style="font-weight: 500; color: orange;">carID : </span> (The car need to get it's info)
+    * <span style="font-weight: 500; color: orange;">`carID` : </span> (The car need to get it's info)
 ___
 
 - `GET /api/car?pageNo=${pageNumber}&limit=${limitNumber}` (get cars info)  
   
     **Query params**
 
-     * <span style="font-weight: 500; color: orange;">pageNo : </span> Used for pagination (default 0 if user not provid in request)
-     * <span style="font-weight: 500; color: orange;">limit : </span> (optional with default 20 per request if user not set)
+     * <span style="font-weight: 500; color: orange;">`pageNo` : </span> Used for pagination (default 0 if user not provid in request)
+     * <span style="font-weight: 500; color: orange;">`limit` : </span> (optional with default 20 per request if user not set)
 ___
 - `DELETE /api/car/${carID}` (delete car info by id)
     
     **Query params**
 
-    * <span style="font-weight: 500; color: orange;">carID : </span> (The car need to remove its info)
+    * <span style="font-weight: 500; color: orange;">`carID` : </span> (The car need to remove its info)
     
 
 ___
@@ -89,5 +89,5 @@ ___
     
     **Query params**
 
-    * <span style="font-weight: 500; color: orange;">carID : </span> (The car need to charge it's balance)
+    * <span style="font-weight: 500; color: orange;">`carID` : </span> (The car need to charge it's balance)
 
