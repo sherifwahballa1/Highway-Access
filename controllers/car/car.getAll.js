@@ -12,8 +12,9 @@ carsInfo = catchAsync(async (req, res, next) => {
   if (error)
     return res.status(400).json({ message: error.message.replace(/"/g, "") });
 
-
-  const queryLimitNo = Number.parseInt(value.limitNo);
+  if (!value.limit) value.limit = 20;
+  if (!value.pageNo) value.pageNo = 0;
+  const queryLimitNo = Number.parseInt(value.limit);
   const querySkipNo = Number.parseInt(value.pageNo) * queryLimitNo;
 
   let cars = await Car.find().skip(querySkipNo).limit(queryLimitNo);
