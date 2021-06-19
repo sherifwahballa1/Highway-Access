@@ -57,21 +57,22 @@ ___
    
     **Query params**
 
-        * `carID` : (The car need to get it's info)
+    * <span style="font-weight: 500; color: orange;">carID : </span> (The car need to get it's info)
 ___
 
 - `GET /api/car?pageNo=${pageNumber}&limit=${limitNumber}` (get cars info)  
   
     **Query params**
 
-        * `pageNo` : Used for pagination (default 0 if user not provid in request)
-        * `limit` : (optional with default 20 per request if user not set)
+     * <span style="font-weight: 500; color: orange;">pageNo : </span> Used for pagination (default 0 if user not provid in request)
+     * <span style="font-weight: 500; color: orange;">limit : </span> (optional with default 20 per request if user not set)
 ___
 - `DELETE /api/car/${carID}` (delete car info by id)
     
     **Query params**
 
-        * `carID` : (The car need to remove it's info)
+    * <span style="font-weight: 500; color: orange;">carID : </span> (The car need to remove its info)
+    
 
 ___
 - `POST /api/card` (create a new access card)  
@@ -88,5 +89,5 @@ ___
     
     **Query params**
 
-        * `carID` : (The car need to charge it's balance)
+    * <span style="font-weight: 500; color: orange;">carID : </span> (The car need to charge it's balance)
 
