@@ -18,6 +18,7 @@ const Car = new mongoose.Schema(
   { timestamps: true }
 );
 
+// query to get car by ID
 Car.query.byID = function (id) {
   return this.where({ _id: mongoose.Types.ObjectId(id) });
 };

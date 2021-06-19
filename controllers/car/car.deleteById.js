@@ -1,25 +1,23 @@
 const mongoose = require("mongoose");
-
-const catchAsync = require("../../utils/catchAsync");
+const createError = require("http-errors");
 
 const Car = require("../../models/car.model");
+const catchAsync = require("../../utils/catchAsync");
 
 removeCar = catchAsync(async (req, res) => {
-  // check if carID provided with request
+  // check if carID provided with req.params
   if (!req.params || !req.params.carID)
-    return res.status(400).json({ message: "carID required" });
+    return next(createError(400, "carID required"));
 
   let carID = req.params.carID;
   // validate type of carID
   if (!mongoose.isValidObjectId(carID))
-    return res.status(400).json({ message: "Invalid carID" });
+    return next(createError(400, "Invalid carID"));
 
-  // check if car exists
+  // check if car exists and delete
   const car = await Car.findOneAndDelete({ _id: carID });
   if (!car)
-    return res
-      .status(409)
-      .json({ message: "There's not exists car with this id" });
+    return next(createError(401, "There's not exists car with this id"));
 
   return res.status(200).json({ message: "Car deleted successfully" });
 });

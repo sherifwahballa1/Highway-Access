@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
-const catchAsync = require("../../utils/catchAsync");
+const createError = require("http-errors");
+
 const Car = require("../../models/car.model");
 const Card = require("../../models/card.model");
+
+const catchAsync = require("../../utils/catchAsync");
 const { newCardValidation } = require("../../validations/card.validation");
 
 passingThrough = catchAsync(async (req, res) => {
@@ -11,15 +14,13 @@ passingThrough = catchAsync(async (req, res) => {
 
   // validate type of carID
   if (!mongoose.isValidObjectId(value.carID))
-    return res.status(400).json({ message: "Invalid carID" });
+    return next(createError(400, "Invalid car ID"));
 
   // check if car exists
   const car = await Car.findOne().byID(value.carID);
 
   if (!car)
-    return res
-      .status(401)
-      .json({ message: "There's not exist car with this id" });
+    return next(createError(401, "There's not exists car with this id"));
 
   // check if card with this car id exists
   const card = await Card.findOne({
@@ -27,16 +28,15 @@ passingThrough = catchAsync(async (req, res) => {
   });
 
   if (!card)
-    return res
-      .status(401)
-      .json({ message: "There's not exist card access for this car" });
+    return next(createError(401, "There's not exist card access for this car"));
 
+  // check the last pass time if exceed 1 min to charge again
   if ((Date.now() - new Date(card.lastPassTime)) / (1000 * 60) > 1) {
+    // validate the access card balance
     if (card.credits < 4)
-      // validate credits in the access card
-      return res
-        .status(400)
-        .json({ message: "Your card credits not enough please charge it" });
+      return next(
+        createError(400, "Your card balance not enough please charge it")
+      );
 
     card.credits -= 4;
     card.lastPassTime = Date.now();

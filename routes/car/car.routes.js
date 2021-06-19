@@ -2,15 +2,15 @@ const express = require("express");
 const router = express.Router({ caseSensitive: true });
 
 const {
-  newCar,
+  addNewCar,
   updateCarInfo,
   carInfoByID,
   carsInfo,
-  removeCar
+  removeCar,
 } = require("../../controllers/car");
 
 // create regitration for a new car
-router.post("/", newCar);
+router.post("/", addNewCar);
 
 // update car info
 router.patch("/", updateCarInfo);
