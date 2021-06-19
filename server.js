@@ -1,30 +1,17 @@
-const mongoose = require("mongoose");
 const dotenv = require("dotenv").config({ path: "./config.env" }); //for manage env variable in development
 const fs = require("fs");
+const { dbConnection } = require("./config/dbConnection");
 // to coloring logs in console
 require("colors");
 
 const app = require("./app.js");
-const Logger = require("./logs/db");
 const debug = require("debug")("Highway-Access:server");
-
-// database connection
-mongoose.connect(
-  process.env.DB_URL,
-  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  },
-  () => {}
-);
 
 // The port used by the Node.js debugger when enabled.
 process.debugPort = 5858;
 
-// logs db connection errors
-Logger.dbConnection(mongoose);
+// connect to db
+dbConnection();
 
 /*
  * Get port from environment and store in Express.
@@ -35,7 +22,7 @@ const PORT = normalizePort(process.env.PORT || "5000");
 app.set("port", PORT);
 
 const server = app.listen(PORT, () => {
-  console.log(`################## Highway App \n################## ${process.env.NODE_ENV}`.blue.bold );
+  console.log(`################## Highway App}`.blue.bold);
 });
 
 server.on("error", onError);
@@ -109,7 +96,6 @@ process.on("warning", (warning) => {
   console.warn(warning.message); // Print the warning message
   console.warn(warning.stack); // Print the stack trace
 });
-
 
 // method returns the number of seconds the current Node.js process has been running
 console.log(
