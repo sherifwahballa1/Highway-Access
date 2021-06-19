@@ -5,7 +5,7 @@ const Car = require("./../../models/car.model");
 const catchAsync = require("./../../utils/catchAsync");
 const { updateCarValidation } = require("./../../validations/car.validation");
 
-updateCarInfo = catchAsync(async (req, res) => {
+updateCarInfo = catchAsync(async (req, res, next) => {
   // validate req.body with joi schema validation
   const { error, value } = updateCarValidation.validate(req.body);
   if (error)

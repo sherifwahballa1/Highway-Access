@@ -7,7 +7,7 @@ const Employee = require("./../../models/employee.model");
 const catchAsync = require("./../../utils/catchAsync");
 const { newCarValidation } = require("./../../validations/car.validation");
 
-addNewCar = catchAsync(async (req, res) => {
+addNewCar = catchAsync(async (req, res, next) => {
   // validate req.body with joi schema validation
   const { error, value } = newCarValidation.validate(req.body);
   if (error)

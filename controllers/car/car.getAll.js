@@ -4,13 +4,14 @@ const catchAsync = require("../../utils/catchAsync");
 const { pagination } = require("../../validations/car.validation");
 
 // performing pagination to decreasing query time response
-carsInfo = catchAsync(async (req, res) => {
+carsInfo = catchAsync(async (req, res, next) => {
   // validate pagination input fields
   let { error, value } = pagination.validate(req.query, {
     stripUnknown: true,
   });
   if (error)
     return res.status(400).json({ message: error.message.replace(/"/g, "") });
+
 
   const queryLimitNo = Number.parseInt(value.limitNo);
   const querySkipNo = Number.parseInt(value.pageNo) * queryLimitNo;

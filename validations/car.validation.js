@@ -62,7 +62,6 @@ const updateSchema = {
     .string()
     .trim()
     .pattern(/^[a-zA-Z ]+$/)
-    .allow("")
     .messages({
       "string.base": `brand name must be consists of letters only`,
       "string.empty": `brand name cannot be an empty`,
@@ -71,7 +70,6 @@ const updateSchema = {
   model: joi
     .string()
     .pattern(/^(19|20)\d{2}$/)
-    .allow("")
     .messages({
       "string.base": `model must be consists of numbers only`,
       "string.empty": `model cannot be an empty`,
@@ -81,7 +79,6 @@ const updateSchema = {
   plateNo: joi
     .string()
     .trim()
-    .allow("")
     .pattern(/^[a-zA-Z0-9 ]+$/)
     .messages({
       "string.base": `plate number must be consists of letters and numbers only`,
@@ -94,5 +91,5 @@ const updateSchema = {
 module.exports = {
   newCarValidation: joi.object(createSchema),
   updateCarValidation: joi.object(updateSchema),
-  pagination: joi.object(paginationSchema)
+  pagination: joi.object(paginationSchema),
 };

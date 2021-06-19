@@ -4,7 +4,7 @@ const createError = require("http-errors");
 const Car = require("../../models/car.model");
 const catchAsync = require("../../utils/catchAsync");
 
-removeCar = catchAsync(async (req, res) => {
+removeCar = catchAsync(async (req, res, next) => {
   // check if carID provided with req.params
   if (!req.params || !req.params.carID)
     return next(createError(400, "carID required"));

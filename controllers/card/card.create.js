@@ -7,7 +7,7 @@ const Card = require("./../../models/card.model");
 const catchAsync = require("./../../utils/catchAsync");
 const { newCardValidation } = require("./../../validations/card.validation");
 
-createNewCard = catchAsync(async (req, res) => {
+createNewCard = catchAsync(async (req, res, next) => {
   const { error, value } = newCardValidation.validate(req.body);
   if (error)
     return res.status(400).json({ message: error.message.replace(/"/g, "") });
